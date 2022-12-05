@@ -21,7 +21,7 @@ class Day01Test {
             9000
 
             10000
-        """.trimIndent())
+        """.trimIndent().lines())
 
     @Test
     fun `calorie counting part one`() {

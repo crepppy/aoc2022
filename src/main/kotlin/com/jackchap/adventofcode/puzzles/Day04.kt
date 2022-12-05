@@ -11,7 +11,7 @@ object Day04 : Day<SectionAssignments>(4, "Camp Cleanup") {
     private fun <T: Comparable<T>> Iterable<T>.containsAny(range: Iterable<T>) =
         first() in range || last() in range
 
-    override fun parseInput(input: String) = input.lines().mapNotNull {
+    override fun parseInput(lines: List<String>) = lines.mapNotNull {
         SECTION_MATCHER.matchEntire(it)?.groupValues?.mapNotNull(String::toIntOrNull)?.let { matches ->
             matches[0]..matches[1] to matches[2]..matches[3]
         }

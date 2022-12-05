@@ -10,7 +10,7 @@ class Day02Test {
         A Y
         B X
         C Z
-    """.trimIndent())
+    """.trimIndent().lines())
 
     @Test
     fun `rock paper scissors part one`() {

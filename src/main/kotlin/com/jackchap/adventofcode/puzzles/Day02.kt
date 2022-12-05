@@ -3,8 +3,8 @@ package com.jackchap.adventofcode.puzzles
 typealias StrategyGuide = List<Pair<Sign, Sign>>
 
 object Day02 : Day<StrategyGuide>(2, "Rock Paper Scissors") {
-    override fun parseInput(input: String) =
-        input.lines().map { it.toCharArray().let { c -> Sign.values()[c[0] - 'A'] to Sign.values()[c[2] - 'X'] } }
+    override fun parseInput(lines: List<String>) =
+        lines.map { it.toCharArray().let { c -> Sign.values()[c[0] - 'A'] to Sign.values()[c[2] - 'X'] } }
 
     override fun partOne(input: StrategyGuide) = input.sumOf { (theirs, response) ->
         response.score + when (response) {

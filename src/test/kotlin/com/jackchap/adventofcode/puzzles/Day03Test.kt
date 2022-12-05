@@ -13,7 +13,7 @@ class Day03Test {
         wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
         ttgJtRGJQctTZtZT
         CrZsJsPPZsGzwwsLwLmpwMDw
-    """.trimIndent())
+    """.trimIndent().lines())
 
 
     @Test
