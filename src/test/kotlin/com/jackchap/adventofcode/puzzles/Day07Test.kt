@@ -33,12 +33,12 @@ class Day07Test {
     """.trimIndent().lines())
 
     @Test
-    fun partOne() {
+    fun `no space left on device part one`() {
         assertEquals(95437, Day07.partOne(input))
     }
 
     @Test
-    fun partTwo() {
+    fun `no space left on device part two`() {
         assertEquals(24933642, Day07.partTwo(input))
     }
 }
