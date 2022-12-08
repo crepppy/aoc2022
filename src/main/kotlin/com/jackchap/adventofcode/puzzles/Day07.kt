@@ -1,7 +1,10 @@
 package com.jackchap.adventofcode.puzzles
 
-object Day07 : Day<File>(7, "No Space Left On Device") {
-    override fun parseInput(lines: List<String>): File {
+private const val STORAGE_REQUIRED = 40_000_000L
+private const val MINIMUM_COUNT_SIZE = 100_000
+
+object Day07 : Day<List<Long>>(7, "No Space Left On Device") {
+    override fun parseInput(lines: List<String>): List<Long> {
         val root = File(null, isDir = true)
         var current = root
         for (out in lines) {
@@ -20,22 +23,15 @@ object Day07 : Day<File>(7, "No Space Left On Device") {
             if (size == "dir") continue
             current[file] = File(null, fileSize = size.toLong())
         }
-        return root
+
+        return root.allDirectories.map(File::totalSize)
     }
 
-    private fun countSum(root: File): Long =
-        (root.totalSize.takeIf { it <= 100_000 } ?: 0) + root.values.filter { it.isDir }.sumOf { countSum(it) }
+    override fun partOne(input: List<Long>) = input.sumOf { it.takeIf { it <= MINIMUM_COUNT_SIZE } ?: 0 }
 
-    override fun partOne(input: File) = countSum(input)
-
-    private fun smallestDirToFree(root: File, spaceToClear: Long): File =
-        root.values
-            .filter { it.isDir && it.totalSize >= spaceToClear }
-            .minOfOrNull { smallestDirToFree(it, spaceToClear) } ?: root
-
-    override fun partTwo(input: File): Long {
-        val spaceToClear = 30000000L + input.totalSize - 70000000L
-        return smallestDirToFree(input, spaceToClear).totalSize
+    override fun partTwo(input: List<Long>): Long {
+        val spaceToClear = input.max() - STORAGE_REQUIRED
+        return input.filter { it >= spaceToClear }.min()
     }
 }
 
@@ -46,6 +42,9 @@ data class File(
 ) : Comparable<File>, MutableMap<String, File> by mutableMapOf() {
     val totalSize: Long
         get() = fileSize + values.sumOf { it.totalSize }
+
+    val allDirectories: List<File>
+        get() = values.filter { it.isDir }.flatMap(File::allDirectories) + this
 
     override fun compareTo(other: File) = totalSize.compareTo(other.totalSize)
 }
