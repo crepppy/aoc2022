@@ -1,11 +1,10 @@
 package com.jackchap.adventofcode.puzzles
 
+import com.jackchap.adventofcode.rotate
+
 typealias CargoStacks = List<List<Char>>
 
 object Day05 : Day<Pair<CargoStacks, List<Instruction>>>(5, "Supply Stacks") {
-    private fun <T> List<List<T>>.rotate(columns: Int) =
-        (0 until columns).map { row -> this.mapNotNull { it.getOrNull(row) } }
-
     private fun <T> MutableList<List<T>>.prependFrom(
         to: Int,
         from: Int,
