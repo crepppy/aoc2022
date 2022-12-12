@@ -5,6 +5,8 @@ import kotlin.math.max
 
 typealias TreeMap = List<List<Int>>
 
+// TODO: Refactor this mess
+
 object Day08 : Day<TreeMap>(8, "Treetop Tree House") {
     override fun parseInput(lines: List<String>) = lines.map { it.toCharArray().map(Char::digitToInt) }
 
